@@ -62,7 +62,7 @@ jobs:
           
           # Build and push the application imag
 
-          docker compose -f docker-compose.prod.yml build app 
+          docker compose -f prod-compose.yaml build app 
           docker tag ghcr.io/${REPO_NAME}:smart-v1 ghcr.io/${REPO_NAME}:smart-v1 
           docker push ghcr.io/${REPO_NAME}:smart-v1
 
