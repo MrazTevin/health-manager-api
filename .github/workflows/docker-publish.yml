@@ -55,7 +55,7 @@ jobs:
           DOCKER_CONTEXT=$(dirname "$DOCKERFILE_PATH")
           
            # Ensure application-prod.properties exists
-          if [ ! -f "./task-infra/src/main/resources/application-prod.properties" ]; then
+          if [ ! -f "./backend/src/main/resources/application-prod.properties" ]; then
             echo "application-prod.properties not found"
             exit 1
           fi
