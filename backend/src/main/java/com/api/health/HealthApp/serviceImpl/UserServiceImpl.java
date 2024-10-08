@@ -24,10 +24,7 @@ public class UserServiceImpl implements UserService {
         return new UserDTO(savedUser.getId(), savedUser.getUsername(), savedUser.getEmail());
     }
 
-    @Override
-    public User createUser(User user) {
-        return null;
-    }
+
 
     @Override
     public UserDTO getUserById(Long id) {

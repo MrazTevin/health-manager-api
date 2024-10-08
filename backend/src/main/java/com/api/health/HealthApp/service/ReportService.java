@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public interface ReportService {
-    Report generateReport(Long userId, Long insuranceId) throws JsonProcessingException;
+    ReportDTO generateReport(Long userId, Long insuranceId) throws JsonProcessingException;
     List<ReportDTO> getReportsByUserId(Long userId);
 
 }

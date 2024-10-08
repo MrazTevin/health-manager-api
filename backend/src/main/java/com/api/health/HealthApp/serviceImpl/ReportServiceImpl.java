@@ -44,7 +44,7 @@ public class ReportServiceImpl implements ReportService {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public Report generateReport(Long userId, Long insuranceId) throws JsonProcessingException {
+    public ReportDTO generateReport(Long userId, Long insuranceId) throws JsonProcessingException {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
@@ -77,7 +77,11 @@ public class ReportServiceImpl implements ReportService {
 
             report.setReportData(objectMapper.writeValueAsString(reportData));
 
-            return reportRepository.save(report);
+            ReportDTO reportDTO = new ReportDTO(report.getId(), user.getId(), insurance.getId(), report.getReportData(), report.getGeneratedAt());
+
+            reportRepository.save(report);
+
+            return reportDTO;
         }
         return null;
     }
