@@ -2,7 +2,7 @@
 services:
   app:
     build:
-      context: ./backend
+      context: .
       dockerfile: Dockerfile
     image: ghcr.io/mraztevin/health-manager-api:smart-v1
     ports:
