@@ -47,7 +47,7 @@ jobs:
           # Find the Dockerfile
           DOCKERFILE_PATH=$(find ./backend -name Dockerfile -o -name dockerfile)
           if [ -z "$DOCKERFILE_PATH" ]; then
-            echo "Dockerfile not found in task-infra directory or its subdirectories"
+            echo "Dockerfile not found in the backend directory or its subdirectories"
             exit 1
           fi
           
@@ -60,9 +60,9 @@ jobs:
             exit 1
           fi
           
-          # Build and push the application imag
+          # Build and push the application image
 
-          docker compose -f prod-compose.yaml build app 
+          docker compose -f ./backend/prod-compose.yaml build app 
           docker tag ghcr.io/${REPO_NAME}:smart-v1 ghcr.io/${REPO_NAME}:smart-v1 
           docker push ghcr.io/${REPO_NAME}:smart-v1
 
