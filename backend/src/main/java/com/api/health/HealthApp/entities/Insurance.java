@@ -23,7 +23,7 @@ public class Insurance {
     private BigDecimal annualPrice;
 
     @ElementCollection
-    private List<Long> hospitalsCovered; // List of Hospital IDs
+    private List<Long> hospitalsCovered;
 
     private LocalDateTime createdAt;
 
