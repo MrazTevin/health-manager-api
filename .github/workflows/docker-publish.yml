@@ -40,6 +40,10 @@ jobs:
       - name: Build and push Docker images
         env:
           GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
+          RENDER_POSTGRES_HOST: ${{ secrets.RENDER_POSTGRES_HOST }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         run: |
           # Convert repository name to lowercase
           REPO_NAME=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
