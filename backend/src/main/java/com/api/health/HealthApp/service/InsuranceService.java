@@ -8,7 +8,6 @@ import java.util.List;
 public interface InsuranceService {
     InsuranceDTO createInsurance(InsuranceDTO insuranceDTO);
 
-    Insurance createInsurance(Insurance insurance);
     InsuranceDTO getInsuranceById(Long id);
     Insurance updateInsurance(Long id, Insurance insurance);
 

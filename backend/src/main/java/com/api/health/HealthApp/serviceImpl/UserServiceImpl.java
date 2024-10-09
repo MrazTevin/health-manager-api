@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
+
     public UserDTO updateUser(Long id, UserDTO userDTO) {
         UserDTO existingUser = getUserById(id);
         User currentUser = userRepository.findById(id).orElse(null);

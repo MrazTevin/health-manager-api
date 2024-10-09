@@ -9,6 +9,7 @@ import com.api.health.HealthApp.service.InsuranceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -29,19 +30,30 @@ public class InsuranceServiceImpl implements InsuranceService {
         insurance.setCountry(insuranceDTO.getCountry());
         insurance.setAnnualPrice(insuranceDTO.getAnnualPrice());
 
-        List<Long> hospitalIds = insuranceDTO.getHospitalsCovered().stream()
-                .map(name -> getHospitalIdByName(String.valueOf(name)))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+
+        List<String> inputHospitals = insuranceDTO.getHospitalsCovered();
+        List<Long> hospitalIds = new ArrayList<>();
+
+        if (inputHospitals != null && !inputHospitals.isEmpty()) {
+
+            hospitalIds = inputHospitals.stream()
+                    .map(this::getHospitalIdByName)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+        }
 
         insurance.setHospitalsCovered(hospitalIds);
 
         Insurance savedInsurance = insuranceRepository.save(insurance);
 
-        List<String> hospitalNames = savedInsurance.getHospitalsCovered().stream()
-                .map(this::getHospitalNameById)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+        List<String> hospitalNames = new ArrayList<>();
+
+        if (savedInsurance.getHospitalsCovered() != null) {
+            hospitalNames = savedInsurance.getHospitalsCovered().stream()
+                    .map(this::getHospitalNameById)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+        }
 
         return new InsuranceDTO(savedInsurance.getId(), savedInsurance.getName(), savedInsurance.getCountry(), savedInsurance.getAnnualPrice(), hospitalNames);
     }
@@ -60,10 +72,6 @@ public class InsuranceServiceImpl implements InsuranceService {
         return hospitalOptional.map(Hospital::getName).orElse(null);
     }
 
-    @Override
-    public Insurance createInsurance(Insurance insurance) {
-        return null;
-    }
 
     @Override
     public InsuranceDTO getInsuranceById(Long id) {

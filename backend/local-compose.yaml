@@ -9,6 +9,7 @@ services:
     env_file:
       - .env
     environment:
+      SPRING_PROFILES_ACTIVE: local
       SPRING_DATA_SOURCE_URL: jdbc:postgresql://postgres_db:5432/${POSTGRES_DB}
       SPRING_DATA_SOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATA_SOURCE_PASSWORD: ${POSTGRES_PASSWORD}

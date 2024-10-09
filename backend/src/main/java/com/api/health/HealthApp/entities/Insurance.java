@@ -3,9 +3,12 @@ package com.api.health.HealthApp.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,9 +26,16 @@ public class Insurance {
     private BigDecimal annualPrice;
 
     @ElementCollection
-    private List<Long> hospitalsCovered;
+    @CollectionTable(
+            name = "insurances_hospitals_covered",
+            joinColumns = @JoinColumn(name = "insurance_id")
+    )
+    @Column(name = "hospitals_covered")
+    private List<Long> hospitalsCovered = new ArrayList<>();
 
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 }

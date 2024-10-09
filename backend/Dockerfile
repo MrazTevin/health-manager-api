@@ -15,6 +15,8 @@ RUN ./mvnw dependency:go-offline -B
 
 COPY src src
 
+
+
 # Package the application
 RUN ./mvnw package -DskipTests
 RUN apk add --no-cache postgresql-client
@@ -27,6 +29,8 @@ VOLUME /tmp
 
 # Copy the dependency application file from build stage
 ARG DEPENDENCY=/app/target/dependency
+
+ENV SPRING_PROFILES_ACTIVE=local
 
 # Copy project dependencies
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib

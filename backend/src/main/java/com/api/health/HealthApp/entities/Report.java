@@ -3,6 +3,7 @@ package com.api.health.HealthApp.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -24,6 +25,7 @@ public class Report {
     @JoinColumn(name = "insurance_id", nullable = false)
     private Insurance insurance;
 
+    @CreationTimestamp
     private LocalDateTime generatedAt;
 
     private String reportData; // JSON or text format

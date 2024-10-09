@@ -36,6 +36,7 @@ public class UserRequest {
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
 
+
         User updatedUser = userService.updateUser(id, user);
 
         return updatedUser != null ? ResponseEntity.ok(new UserDTO(updatedUser.getId(), updatedUser.getUsername(), updatedUser.getEmail())) : ResponseEntity.notFound().build();
